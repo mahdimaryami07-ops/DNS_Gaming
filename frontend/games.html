@@ -45,9 +45,32 @@
             border-radius: 12px; font-size: 1.3rem;
         }
         .logo-text { font-size: 1.4rem; font-weight: 800; color: var(--primary-neon); }
+        
         .nav-links { display: flex; list-style: none; gap: 10px; align-items: center; }
-        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95Font; font-weight: 600; padding: 8px 14px; border-radius: 8px; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; }
         .nav-links a:hover { color: var(--primary-neon); background: rgba(56, 189, 248, 0.08); }
+
+        /* Back Button Style */
+        .btn-back {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary-neon);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            color: #0b0f19;
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+        }
 
         /* Content */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; width: 100%; flex-grow: 1; }
@@ -83,6 +106,7 @@
             <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
             <span class="logo-text">DNS Gaming</span>
         </a>
+
         <ul class="nav-links">
             <li><a href="index.html">خانه</a></li>
             <li><a href="games.html" style="color: var(--primary-neon);">بازی‌ها</a></li>
@@ -90,6 +114,11 @@
             <li><a href="index.html#about">درباره ما</a></li>
             <li><a href="index.html#support">پشتیبانی</a></li>
         </ul>
+
+        <!-- Back Button Added Here -->
+        <button class="btn-back" onclick="goBack()">
+            <i class="fa-solid fa-arrow-right"></i> بازگشت
+        </button>
     </navbar>
 
     <div class="container">
@@ -141,5 +170,14 @@
         <p>کلیه حقوق محفوظ است © DNS Gaming 2026</p>
     </footer>
 
+    <script>
+        function goBack() {
+            if (document.referrer !== "") {
+                window.history.back();
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
 </body>
 </html>
