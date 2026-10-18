@@ -9,7 +9,7 @@
         :root {
             --bg-color: #0b0f19;
             --card-bg: #151d2a;
-            --nav-bg: rgba(15, 23, 42, 0.9);
+            --nav-bg: rgba(15, 23, 42, 0.85);
             --primary: #38bdf8;
             --primary-neon: #00f2fe;
             --accent: #22c55e;
@@ -18,11 +18,10 @@
             --border-color: rgba(255, 255, 255, 0.1);
         }
 
-        /* Light Mode Variables */
         body.light-mode {
             --bg-color: #f1f5f9;
             --card-bg: #ffffff;
-            --nav-bg: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(255, 255, 255, 0.85);
             --primary: #0284c7;
             --primary-neon: #0369a1;
             --accent: #16a34a;
@@ -45,36 +44,61 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            scroll-behavior: smooth;
         }
 
-        /* Navigation Bar */
+        /* Modern & Glowing Navigation Bar */
         navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
             background: var(--nav-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 24px;
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--primary-neon);
+            gap: 12px;
             text-decoration: none;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #00f2fe, #38bdf8);
+            color: #0b0f19;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+            animation: pulseGlow 2s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px rgba(0, 242, 254, 0.3); }
+            to { box-shadow: 0 0 20px rgba(0, 242, 254, 0.8); }
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-neon);
+            letter-spacing: 0.5px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 10px;
             align-items: center;
         }
 
@@ -82,12 +106,33 @@
             color: var(--text-main);
             text-decoration: none;
             font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Header Hover Effects */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-neon);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--primary-neon);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
         }
 
         .nav-actions {
@@ -112,6 +157,7 @@
         .icon-btn:hover {
             border-color: var(--primary);
             color: var(--primary);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
         }
 
         .auth-btns {
@@ -123,75 +169,144 @@
             background: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            background: rgba(56, 189, 248, 0.1);
         }
 
         .btn-register {
             background: linear-gradient(135deg, #00f2fe, #4facfe);
             border: none;
-            color: #000;
-            padding: 8px 16px;
+            color: #0b0f19;
+            padding: 8px 18px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
         }
 
-        /* Sections Styling */
+        .btn-register:hover {
+            opacity: 0.9;
+        }
+
+        /* Hero Section */
         header {
             text-align: center;
-            padding: 60px 20px 30px;
+            padding: 80px 20px 40px;
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             color: var(--primary-neon);
             margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
         }
 
         header p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         section {
-            padding: 40px 20px;
-            max-width: 1100px;
+            padding: 60px 20px;
+            max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
             color: var(--text-main);
+            position: relative;
         }
 
-        /* Games Grid */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-neon);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Games Detailed Grid */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
         .game-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
-        .game-card i {
-            font-size: 2.5rem;
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
+        }
+
+        .game-img-container {
+            height: 180px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .game-img-container i {
+            font-size: 4rem;
             color: var(--primary);
+            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
+        }
+
+        .game-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: bold;
             margin-bottom: 10px;
-            display: block;
+            color: var(--text-main);
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .game-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            width: fit-content;
+            border: 1px solid rgba(56, 189, 248, 0.3);
         }
 
         /* Pricing Section */
@@ -205,31 +320,36 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            padding: 30px 24px;
+            padding: 35px 24px;
             text-align: center;
             position: relative;
+            transition: transform 0.3s;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
         }
 
         .plan-card.popular {
             border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
         }
 
         .popular-badge {
             position: absolute;
-            top: -12px;
+            top: -14px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--primary);
-            color: #000;
+            color: #0b0f19;
             font-weight: bold;
-            font-size: 0.8rem;
-            padding: 4px 16px;
+            font-size: 0.85rem;
+            padding: 5px 18px;
             border-radius: 20px;
         }
 
-        .plan-title { font-size: 1.4rem; margin-bottom: 15px; }
-        .plan-price { font-size: 2rem; font-weight: bold; color: var(--primary-neon); margin-bottom: 20px; }
+        .plan-title { font-size: 1.5rem; margin-bottom: 15px; }
+        .plan-price { font-size: 2.2rem; font-weight: bold; color: var(--primary-neon); margin-bottom: 20px; }
         .plan-price span { font-size: 0.9rem; color: var(--text-muted); }
 
         .plan-features { list-style: none; margin-bottom: 25px; text-align: right; }
@@ -242,11 +362,14 @@
             background: linear-gradient(135deg, #00f2fe, #4facfe);
             border: none;
             border-radius: 10px;
-            color: #000;
+            color: #0b0f19;
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
+
+        .buy-btn:hover { opacity: 0.9; }
 
         /* Footer */
         footer {
@@ -261,10 +384,11 @@
 </head>
 <body>
 
-    <!-- Header Navigation Bar -->
+    <!-- Modern Glowing Navigation Bar -->
     <navbar>
         <a href="#home" class="nav-logo">
-            <i class="fa-solid fa-gamepad"></i> DNS Gaming
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="logo-text">DNS Gaming</span>
         </a>
 
         <ul class="nav-links">
@@ -295,22 +419,87 @@
         </div>
     </navbar>
 
-    <!-- Hero / Home Section -->
+    <!-- Hero Section -->
     <header id="home">
-        <h1><i class="fa-solid fa-bolt"></i> سرویس DNS اختصاصی گیمینگ</h1>
+        <h1>سرویس DNS اختصاصی گیمینگ</h1>
         <p>تجربه بازی بدون تحریم، با حداقل پینگ و بدون قطعی و Packet Loss</p>
     </header>
 
-    <!-- Supported Games Section -->
+    <!-- Supported Games Section with Descriptions & Icons -->
     <section id="games">
         <h2 class="section-title">بازی‌های پشتیبانی شده</h2>
         <div class="games-grid">
-            <div class="game-card"><i class="fa-solid fa-crosshairs"></i> Valorant</div>
-            <div class="game-card"><i class="fa-solid fa-gun"></i> Call of Duty: Warzone</div>
-            <div class="game-card"><i class="fa-solid fa-shield-halved"></i> EA SPORTS FC 25</div>
-            <div class="game-card"><i class="fa-solid fa-person-rifle"></i> Fortnite</div>
-            <div class="game-card"><i class="fa-solid fa-trophy"></i> Rocket League</div>
-            <div class="game-card"><i class="fa-solid fa-headset"></i> Apex Legends</div>
+            <!-- Valorant -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-crosshairs"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-desc">کاهش شدید پینگ و رفع خطای اتصال سرورهای ریوت گیمز. بدون افت فریم و پکت لاس برای رقابت حرفه‌ای.</p>
+                    <span class="game-badge">سرور اختصاصی اروپا/ترکیه</span>
+                </div>
+            </div>
+
+            <!-- Warzone -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-gun"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Call of Duty: Warzone</h3>
+                    <p class="game-desc">دور زدن کامل تحریم‌های اکتیویژن و ورود سریع به لابی بازی بدون مشکل فریز شدن و تاخیر در شلیک.</p>
+                    <span class="game-badge">بهبود سرورهای بتل رویال</span>
+                </div>
+            </div>
+
+            <!-- FC 25 -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">EA SPORTS FC 25</h3>
+                    <p class="game-desc">تجربه بازی روان در بخش Ultimate Team بدون تاخیر در کنترل بازیکنان و قطع ارتباط ناگهانی وسط مسابقه.</p>
+                    <span class="game-badge">پینگ زیر ۵۰ میلی‌ثانیه</span>
+                </div>
+            </div>
+
+            <!-- Fortnite -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-person-rifle"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Fortnite</h3>
+                    <p class="game-desc">ارتباط پایدار با سرورهای اپیک گیمز و اجرای سریع ساخت‌وساز بدون تاخیر (Delay) در نبردهای سنگین.</p>
+                    <span class="game-badge">بهینه‌سازی پکت‌لاس</span>
+                </div>
+            </div>
+
+            <!-- Rocket League -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Rocket League</h3>
+                    <p class="game-desc">حرکات نرم و دقیق خودروها در مسابقات آنلاین بدون پرش پینگ و لگ‌های لحظه‌ای موقع ضربه به توپ.</p>
+                    <span class="game-badge">سرعت پاسخگویی بالا</span>
+                </div>
+            </div>
+
+            <!-- Apex Legends -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Apex Legends</h3>
+                    <p class="game-desc">رفع خطای عدم اتصال به سرورهای EA و کاهش تاخیر در درگیری‌های تیمی بتل رویال.</p>
+                    <span class="game-badge">عبور از تحریم</span>
+                </div>
+            </div>
         </div>
     </section>
 
