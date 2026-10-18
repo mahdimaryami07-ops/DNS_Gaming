@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Gaming | خرید و ارائه DNS اختصاصی گیمینگ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151d2a;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --primary: #38bdf8;
+            --primary-neon: #00f2fe;
+            --accent: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --primary: #0284c7;
+            --primary-neon: #0369a1;
+            --accent: #16a34a;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Bar */
+        navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: linear-gradient(135deg, #00f2fe, #38bdf8);
+            color: #0b0f19;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-neon);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-neon);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .auth-btns { display: flex; gap: 10px; }
+        .btn-login {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: none;
+            color: #0b0f19;
+            padding: 8px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: var(--primary-neon);
+            margin-bottom: 15px;
+        }
+
+        header p { color: var(--text-muted); font-size: 1.2rem; }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
+
+        .game-img-container {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+            background: #1e293b;
+        }
+
+        .game-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .game-title { font-size: 1.3rem; margin-bottom: 10px; }
+        .game-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; }
+        .game-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            width: fit-content;
+        }
+
+        footer {
+            margin-top: auto;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <navbar>
+        <a href="#home" class="nav-logo">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="logo-text">DNS Gaming</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">خانه</a></li>
+            <li><a href="#games">بازی‌ها</a></li>
+            <li><a href="#pricing">قیمت‌ها</a></li>
+            <li><a href="#about">درباره ما</a></li>
+            <li><a href="#support">پشتیبانی</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+            <div class="auth-btns">
+                <button class="btn-login">ورود</button>
+                <button class="btn-register">ثبت نام</button>
+            </div>
+        </div>
+    </navbar>
+
+    <header id="home">
+        <h1>سرویس DNS اختصاصی گیمینگ</h1>
+        <p>تجربه بازی بدون تحریم، با حداقل پینگ و بدون قطعی</p>
+    </header>
+
+    <section id="games">
+        <h2 class="section-title">بازی‌های پشتیبانی شده</h2>
+        <div class="games-grid">
+            <!-- Valorant -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <img src="images/valorant.jpg" alt="Valorant" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Valorant'">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Valorant</h3>
+                    <p class="game-desc">کاهش شدید پینگ و رفع خطای اتصال سرورهای ریوت گیمز بدون افت فریم.</p>
+                    <span class="game-badge">سرور اختصاصی اروپا/ترکیه</span>
+                </div>
+            </div>
+
+            <!-- Warzone -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <img src="images/warzone.jpg" alt="Call of Duty Warzone" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Warzone'">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Call of Duty: Warzone</h3>
+                    <p class="game-desc">دور زدن کامل تحریم‌های اکتیویژن و ورود سریع به لابی بازی.</p>
+                    <span class="game-badge">بهبود سرورهای بتل رویال</span>
+                </div>
+            </div>
+
+            <!-- FC 25 -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <img src="images/fc25.jpg" alt="EA SPORTS FC 25" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=FC+25'">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">EA SPORTS FC 25</h3>
+                    <p class="game-desc">تجربه بازی روان در بخش Ultimate Team بدون تاخیر در کنترل بازیکنان.</p>
+                    <span class="game-badge">پینگ زیر ۵۰ میلی‌ثانیه</span>
+                </div>
+            </div>
+
+            <!-- Fortnite -->
+            <div class="game-card">
+                <div class="game-img-container">
+                    <img src="images/fortnite.jpg" alt="Fortnite" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Fortnite'">
+                </div>
+                <div class="game-content">
+                    <h3 class="game-title">Fortnite</h3>
+                    <p class="game-desc">ارتباط پایدار با سرورهای اپیک گیمز و اجرای سریع ساخت‌وساز بدون تاخیر.</p>
+                    <span class="game-badge">بهینه‌سازی پکت‌لاس</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>کلیه حقوق محفوظ است © DNS Gaming 2026</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
+</body>
+</html>
