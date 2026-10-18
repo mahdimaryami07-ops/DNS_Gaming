@@ -50,27 +50,15 @@
         .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; }
         .nav-links a:hover { color: var(--primary-neon); background: rgba(56, 189, 248, 0.08); }
 
-        /* Back Button Style */
         .btn-back {
             background: rgba(56, 189, 248, 0.1);
             border: 1px solid var(--primary);
             color: var(--primary-neon);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            padding: 8px 16px; border-radius: 8px; cursor: pointer;
+            font-weight: bold; display: flex; align-items: center; gap: 8px;
             transition: all 0.2s ease;
-            text-decoration: none;
         }
-
-        .btn-back:hover {
-            background: var(--primary);
-            color: #0b0f19;
-            box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
-        }
+        .btn-back:hover { background: var(--primary); color: #0b0f19; box-shadow: 0 0 12px rgba(0, 242, 254, 0.4); }
 
         /* Content */
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; width: 100%; flex-grow: 1; }
@@ -78,22 +66,71 @@
         
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
+
+        /* Card Animation & Hover Effects */
         .game-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;
-            transition: transform 0.3s;
+            text-decoration: none; color: inherit;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            cursor: pointer;
         }
-        .game-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .game-img { height: 180px; width: 100%; object-fit: cover; background: #1e293b; }
-        .game-info { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
-        .game-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+
+        .game-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-neon);
+            box-shadow: 0 15px 30px rgba(0, 242, 254, 0.25);
+        }
+
+        .game-img-wrapper {
+            height: 200px; width: 100%; overflow: hidden; position: relative;
+            background: #1e293b;
+        }
+
+        .game-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .game-img {
+            transform: scale(1.12);
+        }
+
+        .game-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(11, 15, 25, 0.9), transparent);
+            opacity: 0.6; transition: opacity 0.3s ease;
+        }
+
+        .game-card:hover .game-overlay {
+            opacity: 0.3;
+        }
+
+        .game-info { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .game-title { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: var(--text-main); }
         .game-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        
+        .card-footer {
+            display: flex; justify-content: space-between; align-items: center; margin-top: auto;
+        }
+
         .game-badge {
             background: rgba(56, 189, 248, 0.1); color: var(--primary);
-            padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; width: fit-content;
+            padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .view-btn {
+            color: var(--primary-neon); font-size: 0.9rem; font-weight: bold;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .game-card:hover .view-btn i {
+            transform: translateX(-5px);
+            transition: transform 0.3s ease;
         }
 
         footer { background: var(--card-bg); padding: 30px 20px; text-align: center; color: var(--text-muted); margin-top: auto; }
@@ -115,7 +152,6 @@
             <li><a href="index.html#support">پشتیبانی</a></li>
         </ul>
 
-        <!-- Back Button Added Here -->
         <button class="btn-back" onclick="goBack()">
             <i class="fa-solid fa-arrow-right"></i> بازگشت
         </button>
@@ -125,44 +161,68 @@
         <h1 class="page-title">بازی‌های پشتیبانی شده</h1>
         <div class="games-grid">
             <!-- Valorant -->
-            <div class="game-card">
-                <img src="images/valorant.jpg" alt="Valorant" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Valorant'">
+            <a href="game-details.html?game=valorant" class="game-card">
+                <div class="game-img-wrapper">
+                    <img src="images/valorant.jpg" alt="Valorant" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Valorant'">
+                    <div class="game-overlay"></div>
+                </div>
                 <div class="game-info">
                     <h3 class="game-title">Valorant</h3>
-                    <p class="game-desc">کاهش شدید پینگ و رفع خطای اتصال سرورهای ریوت گیمز. بدون افت فریم برای رقابت حرفه‌ای.</p>
-                    <span class="game-badge">سرور اختصاصی اروپا/ترکیه</span>
+                    <p class="game-desc">کاهش شدید پینگ و رفع خطای اتصال سرورهای ریوت گیمز بدون افت فریم.</p>
+                    <div class="card-footer">
+                        <span class="game-badge">سرور اختصاصی</span>
+                        <span class="view-btn">مشاهده جزئیات <i class="fa-solid fa-chevron-left"></i></span>
+                    </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Warzone -->
-            <div class="game-card">
-                <img src="images/warzone.jpg" alt="Warzone" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Warzone'">
+            <a href="game-details.html?game=warzone" class="game-card">
+                <div class="game-img-wrapper">
+                    <img src="images/warzone.jpg" alt="Warzone" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Warzone'">
+                    <div class="game-overlay"></div>
+                </div>
                 <div class="game-info">
                     <h3 class="game-title">Call of Duty: Warzone</h3>
                     <p class="game-desc">دور زدن کامل تحریم‌های اکتیویژن و ورود سریع به لابی بدون مشکل تاخیر در شلیک.</p>
-                    <span class="game-badge">بهبود سرورهای بتل رویال</span>
+                    <div class="card-footer">
+                        <span class="game-badge">بتل رویال</span>
+                        <span class="view-btn">مشاهده جزئیات <i class="fa-solid fa-chevron-left"></i></span>
+                    </div>
                 </div>
-            </div>
+            </a>
 
             <!-- FC 25 -->
-            <div class="game-card">
-                <img src="images/fc25.jpg" alt="FC 25" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=FC+25'">
+            <a href="game-details.html?game=fc25" class="game-card">
+                <div class="game-img-wrapper">
+                    <img src="images/fc25.jpg" alt="FC 25" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=FC+25'">
+                    <div class="game-overlay"></div>
+                </div>
                 <div class="game-info">
                     <h3 class="game-title">EA SPORTS FC 25</h3>
                     <p class="game-desc">تجربه بازی روان در بخش Ultimate Team بدون تاخیر در کنترل بازیکنان و قطع ارتباط.</p>
-                    <span class="game-badge">پینگ زیر ۵۰ میلی‌ثانیه</span>
+                    <div class="card-footer">
+                        <span class="game-badge">پینگ زیر ۵۰ms</span>
+                        <span class="view-btn">مشاهده جزئیات <i class="fa-solid fa-chevron-left"></i></span>
+                    </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Fortnite -->
-            <div class="game-card">
-                <img src="images/fortnite.jpg" alt="Fortnite" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Fortnite'">
+            <a href="game-details.html?game=fortnite" class="game-card">
+                <div class="game-img-wrapper">
+                    <img src="images/fortnite.jpg" alt="Fortnite" class="game-img" onerror="this.src='https://via.placeholder.com/600x350/1e293b/38bdf8?text=Fortnite'">
+                    <div class="game-overlay"></div>
+                </div>
                 <div class="game-info">
                     <h3 class="game-title">Fortnite</h3>
                     <p class="game-desc">ارتباط پایدار با سرورهای اپیک گیمز و اجرای سریع ساخت‌وساز بدون تاخیر.</p>
-                    <span class="game-badge">بهینه‌سازی پکت‌لاس</span>
+                    <div class="card-footer">
+                        <span class="game-badge">صفر کردن پکت‌لاس</span>
+                        <span class="view-btn">مشاهده جزئیات <i class="fa-solid fa-chevron-left"></i></span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -172,11 +232,8 @@
 
     <script>
         function goBack() {
-            if (document.referrer !== "") {
-                window.history.back();
-            } else {
-                window.location.href = "index.html";
-            }
+            if (document.referrer !== "") { window.history.back(); }
+            else { window.location.href = "index.html"; }
         }
     </script>
 </body>

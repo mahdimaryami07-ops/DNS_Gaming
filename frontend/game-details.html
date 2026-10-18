@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات بازی | DNS Gaming</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151d2a;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --primary: #38bdf8;
+            --primary-neon: #00f2fe;
+            --accent: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+
+        navbar {
+            position: sticky; top: 0; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 30px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { background: linear-gradient(135deg, #00f2fe, #38bdf8); color: #0b0f19; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.3rem; }
+        .logo-text { font-size: 1.4rem; font-weight: 800; color: var(--primary-neon); }
+
+        .btn-back {
+            background: rgba(56, 189, 248, 0.1); border: 1px solid var(--primary); color: var(--primary-neon);
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
+        }
+
+        .game-hero {
+            position: relative; height: 350px; width: 100%;
+            display: flex; align-items: flex-end; padding: 40px;
+            background-size: cover; background-position: center;
+        }
+
+        .game-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, var(--bg-color), transparent);
+        }
+
+        .hero-title {
+            position: relative; z-index: 2; font-size: 3rem; color: var(--primary-neon);
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+        }
+
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 20px; width: 100%; flex-grow: 1; }
+
+        .details-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-top: 20px;
+        }
+
+        .main-info {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 30px; line-height: 1.8;
+        }
+
+        .main-info h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.5rem; }
+        .main-info p { color: var(--text-muted); margin-bottom: 20px; }
+
+        .side-info {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 25px; display: flex; flex-direction: column; gap: 20px;
+        }
+
+        .stat-item { border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+        .stat-item:last-child { border-bottom: none; }
+        .stat-label { color: var(--text-muted); font-size: 0.9rem; }
+        .stat-value { color: var(--primary-neon); font-size: 1.2rem; font-weight: bold; margin-top: 4px; }
+
+        .buy-btn {
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: none; border-radius: 10px; color: #0b0f19; font-weight: bold; font-size: 1rem;
+            cursor: pointer; text-align: center; text-decoration: none; display: block;
+        }
+
+        footer { background: var(--card-bg); padding: 30px 20px; text-align: center; color: var(--text-muted); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <navbar>
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="logo-text">DNS Gaming</span>
+        </a>
+        <button class="btn-back" onclick="window.history.back()">
+            <i class="fa-solid fa-arrow-right"></i> بازگشت به بازی‌ها
+        </button>
+    </navbar>
+
+    <div class="game-hero" id="game-hero">
+        <h1 class="hero-title" id="game-title">نام بازی</h1>
+    </div>
+
+    <div class="container">
+        <div class="details-grid">
+            <div class="main-info">
+                <h2>درباره سرویس DNS این بازی</h2>
+                <p id="game-description">در حال بارگذاری توضیحات...</p>
+                
+                <h2>مزایای استفاده از DNS Gaming</h2>
+                <ul style="color: var(--text-muted); padding-right: 20px; line-height: 2;">
+                    <li>رفع کامل تحریم‌های منطقه‌ای سرورها</li>
+                    <li>پایداری عالی در نبردهای آنلاین و حذف Packet Loss</li>
+                    <li>بدون نیاز به نصب نرم‌افزار جانبی و افت فریم</li>
+                    <li>پشتیبانی از تمامی پلتفرم‌ها (PC, PS5, Xbox, Mobile)</li>
+                </ul>
+            </div>
+
+            <div class="side-info">
+                <div class="stat-item">
+                    <div class="stat-label">وضعیت سرور</div>
+                    <div class="stat-value" style="color: var(--accent);"><i class="fa-solid fa-circle-check"></i> آنالیز شده و فعال</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">پینگ میانگین</div>
+                    <div class="stat-value" id="game-ping">۴۵ - ۶۰ ms</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">پلتفرم‌های پشتیبانی‌شده</div>
+                    <div class="stat-value" style="font-size: 1rem;">PC / Consoles / Mobile</div>
+                </div>
+                <a href="index.html#pricing" class="buy-btn">خرید اشتراک DNS</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>کلیه حقوق محفوظ است © DNS Gaming 2026</p>
+    </footer>
+
+    <script>
+        const gamesData = {
+            'valorant': {
+                title: 'Valorant',
+                bg: 'images/valorant.jpg',
+                ping: '۳۵ - ۵۵ ms',
+                desc: 'بازی Valorant به دلیل حساسیت بالا به خطای پکت لاس و پینگ، نیاز به اتصال بسیار پایدار دارد. سرویس DNS ما مسیرهای ارتباطی شما با سرورهای فرانکفورت و استانبول ریوت گیمز را بهینه‌سازی کرده و مشکل قطع اتصال وسط متچ را کاملاً حل می‌کند.'
+            },
+            'warzone': {
+                title: 'Call of Duty: Warzone',
+                bg: 'images/warzone.jpg',
+                ping: '۵۰ - ۷۰ ms',
+                desc: 'کالاف دیوتی وارزون یکی از بیشترین تحریم‌ها را برای کاربران ایرانی دارد. با فعال‌سازی DNS اختصاصی ما، بدون نیاز به نرم‌افزارهای تغییر آی‌پی سنگین می‌توانید به راحتی وارد لابی بازی شده و با کمترین تاخیر در شلیک (Hit Registration) بازی کنید.'
+            },
+            'fc25': {
+                title: 'EA SPORTS FC 25',
+                bg: 'images/fc25.jpg',
+                ping: '۴۰ - ۶۰ ms',
+                desc: 'در بخش الکپ و Ultimate Team بازی FC 25، کوچک‌ترین تاخیر (Delay) باعث خروج از بازی و باخت می‌شود. این سرویس اتصال شما به سرورهای EA را مستقیم کرده و تاخیر دسته را به حداقل ممکن می‌رساند.'
+            },
+            'fortnite': {
+                title: 'Fortnite',
+                bg: 'images/fortnite.jpg',
+                ping: '۴۵ - ۶۵ ms',
+                desc: 'در فورتنایت سرعت ساخت‌وساز (Building) بستگی مستقیم به پینگ دارد. DNS اختصاصی ما مشکل عدم اتصال به اپیک گیمز را رفع کرده و پینگ بسیار پایینی را برای لابی‌های اروپایی ارائه می‌دهد.'
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameKey = urlParams.get('game') || 'valorant';
+        const game = gamesData[gameKey] || gamesData['valorant'];
+
+        document.getElementById('game-title').innerText = game.title;
+        document.getElementById('game-description').innerText = game.desc;
+        document.getElementById('game-ping').innerText = game.ping;
+        document.getElementById('game-hero').style.backgroundImage = `url('${game.bg}')`;
+    </script>
+</body>
+</html>
