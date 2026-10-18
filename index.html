@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNS Gaming | خرید DNS اختصاصی گیمینگ</title>
+    <title>DNS Gaming | خرید و ارائه DNS اختصاصی گیمینگ</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0b0f19;
             --card-bg: #151d2a;
+            --nav-bg: rgba(15, 23, 42, 0.9);
             --primary: #38bdf8;
             --primary-neon: #00f2fe;
             --accent: #22c55e;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --primary: #0284c7;
+            --primary-neon: #0369a1;
+            --accent: #16a34a;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -21,6 +36,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         body {
@@ -29,20 +45,110 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
         }
 
+        /* Navigation Bar */
+        navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-neon);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icon-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .auth-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: none;
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Sections Styling */
         header {
             text-align: center;
-            margin: 40px 0 30px;
+            padding: 60px 20px 30px;
         }
 
         header h1 {
             font-size: 2.8rem;
             color: var(--primary-neon);
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         header p {
@@ -50,23 +156,57 @@
             font-size: 1.1rem;
         }
 
+        section {
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text-main);
+        }
+
+        /* Games Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .game-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: block;
+        }
+
         /* Pricing Section */
         .plans-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            width: 100%;
-            max-width: 1100px;
-            margin-top: 20px;
         }
 
         .plan-card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
             border-radius: 18px;
             padding: 30px 24px;
             text-align: center;
-            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -88,40 +228,13 @@
             border-radius: 20px;
         }
 
-        .plan-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
+        .plan-title { font-size: 1.4rem; margin-bottom: 15px; }
+        .plan-price { font-size: 2rem; font-weight: bold; color: var(--primary-neon); margin-bottom: 20px; }
+        .plan-price span { font-size: 0.9rem; color: var(--text-muted); }
 
-        .plan-price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-neon);
-            margin-bottom: 20px;
-        }
-
-        .plan-price span {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        .plan-features {
-            list-style: none;
-            margin-bottom: 25px;
-            text-align: right;
-        }
-
-        .plan-features li {
-            padding: 8px 0;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .plan-features li i {
-            color: var(--accent);
-            margin-left: 8px;
-        }
+        .plan-features { list-style: none; margin-bottom: 25px; text-align: right; }
+        .plan-features li { padding: 8px 0; color: var(--text-muted); font-size: 0.95rem; }
+        .plan-features li i { color: var(--accent); margin-left: 8px; }
 
         .buy-btn {
             width: 100%;
@@ -133,73 +246,150 @@
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            transition: opacity 0.2s;
         }
 
-        .buy-btn:hover {
-            opacity: 0.9;
-        }
-
+        /* Footer */
         footer {
             margin-top: auto;
-            padding: 30px 0 10px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1><i class="fa-solid fa-bolt"></i> DNS Gaming VIP</h1>
-        <p>خرید DNS اختصاصی پینگ پایین و بدون قطعی برای انواع کنسول و PC</p>
+    <!-- Header Navigation Bar -->
+    <navbar>
+        <a href="#home" class="nav-logo">
+            <i class="fa-solid fa-gamepad"></i> DNS Gaming
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">خانه</a></li>
+            <li><a href="#games">بازی‌ها</a></li>
+            <li><a href="#pricing">قیمت‌ها</a></li>
+            <li><a href="#about">درباره ما</a></li>
+            <li><a href="#contact">ارتباط با ما</a></li>
+            <li><a href="#support">پشتیبانی</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <!-- Theme Toggle -->
+            <button class="icon-btn" id="theme-toggle" onclick="toggleTheme()">
+                <i class="fa-solid fa-moon"></i> <span id="theme-text">تاریک</span>
+            </button>
+
+            <!-- Language Switcher -->
+            <button class="icon-btn" onclick="alert('تغییر زبان به انگلیسی به زودی...')">
+                <i class="fa-solid fa-globe"></i> FA
+            </button>
+
+            <!-- Login / Register Buttons -->
+            <div class="auth-btns">
+                <button class="btn-login" onclick="alert('صفحه ورود')">ورود</button>
+                <button class="btn-register" onclick="alert('صفحه ثبت نام')">ثبت نام</button>
+            </div>
+        </div>
+    </navbar>
+
+    <!-- Hero / Home Section -->
+    <header id="home">
+        <h1><i class="fa-solid fa-bolt"></i> سرویس DNS اختصاصی گیمینگ</h1>
+        <p>تجربه بازی بدون تحریم، با حداقل پینگ و بدون قطعی و Packet Loss</p>
     </header>
 
-    <div class="plans-container">
-        <!-- Plan 1 -->
-        <div class="plan-card">
-            <h3 class="plan-title">اشتراک ۱ ماهه</h3>
-            <div class="plan-price">۸۹,۰۰۰ <span>تومان</span></div>
-            <ul class="plan-features">
-                <li><i class="fa-solid fa-check"></i> آی‌پی اختصاصی با سرعت بالا</li>
-                <li><i class="fa-solid fa-check"></i> کاهش پینگ و صفر کردن Packet Loss</li>
-                <li><i class="fa-solid fa-check"></i> پشتیبانی از تمامی بازی‌ها</li>
-                <li><i class="fa-solid fa-check"></i> تک کاربره</li>
-            </ul>
-            <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+    <!-- Supported Games Section -->
+    <section id="games">
+        <h2 class="section-title">بازی‌های پشتیبانی شده</h2>
+        <div class="games-grid">
+            <div class="game-card"><i class="fa-solid fa-crosshairs"></i> Valorant</div>
+            <div class="game-card"><i class="fa-solid fa-gun"></i> Call of Duty: Warzone</div>
+            <div class="game-card"><i class="fa-solid fa-shield-halved"></i> EA SPORTS FC 25</div>
+            <div class="game-card"><i class="fa-solid fa-person-rifle"></i> Fortnite</div>
+            <div class="game-card"><i class="fa-solid fa-trophy"></i> Rocket League</div>
+            <div class="game-card"><i class="fa-solid fa-headset"></i> Apex Legends</div>
         </div>
+    </section>
 
-        <!-- Plan 2 (Popular) -->
-        <div class="plan-card popular">
-            <span class="popular-badge">پیشنهاد ویژه</span>
-            <h3 class="plan-title">اشتراک ۳ ماهه</h3>
-            <div class="plan-price">۲۱۹,۰۰۰ <span>تومان</span></div>
-            <ul class="plan-features">
-                <li><i class="fa-solid fa-check"></i> تمامی امکانات اشتراک ۱ ماهه</li>
-                <li><i class="fa-solid fa-check"></i> ۲۰٪ تخفیف اقتصادی</li>
-                <li><i class="fa-solid fa-check"></i> اولویت بالای پهنای باند</li>
-                <li><i class="fa-solid fa-check"></i> پشتیبانی ۲۴/۷ تلگرام</li>
-            </ul>
-            <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
-        </div>
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <h2 class="section-title">پلن‌ها و قیمت‌ها</h2>
+        <div class="plans-container">
+            <div class="plan-card">
+                <h3 class="plan-title">اشتراک ۱ ماهه</h3>
+                <div class="plan-price">۸۹,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> آی‌پی اختصاصی با سرعت بالا</li>
+                    <li><i class="fa-solid fa-check"></i> کاهش پینگ و صفر کردن Packet Loss</li>
+                    <li><i class="fa-solid fa-check"></i> پشتیبانی از تمامی بازی‌ها</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
 
-        <!-- Plan 3 -->
-        <div class="plan-card">
-            <h3 class="plan-title">اشتراک ۱ ساله</h3>
-            <div class="plan-price">۶۹۰,۰۰۰ <span>تومان</span></div>
-            <ul class="plan-features">
-                <li><i class="fa-solid fa-check"></i> حداکثر صرفه‌جویی اقتصادی</li>
-                <li><i class="fa-solid fa-check"></i> سرور اختصاصی VIP</li>
-                <li><i class="fa-solid fa-check"></i> قابلیت استفاده روی ۲ دستگاه</li>
-                <li><i class="fa-solid fa-check"></i> پشتیبانی اختصاصی تلفنی/تلگرامی</li>
-            </ul>
-            <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            <div class="plan-card popular">
+                <span class="popular-badge">پیشنهاد ویژه</span>
+                <h3 class="plan-title">اشتراک ۳ ماهه</h3>
+                <div class="plan-price">۲۱۹,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> تمامی امکانات اشتراک ۱ ماهه</li>
+                    <li><i class="fa-solid fa-check"></i> ۲۰٪ تخفیف اقتصادی</li>
+                    <li><i class="fa-solid fa-check"></i> اولویت بالای پهنای باند</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
+
+            <div class="plan-card">
+                <h3 class="plan-title">اشتراک ۱ ساله</h3>
+                <div class="plan-price">۶۹۰,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> حداکثر صرفه‌جویی اقتصادی</li>
+                    <li><i class="fa-solid fa-check"></i> سرور اختصاصی VIP</li>
+                    <li><i class="fa-solid fa-check"></i> قابل استفاده روی ۲ دستگاه</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about">
+        <h2 class="section-title">درباره ما</h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: 0 auto; line-height: 1.8;">
+            DNS Gaming ارائه دهنده سرویس‌های اختصاصی برای گیمرهای ایرانی است تا تحریم‌های بین‌المللی بازی‌ها را دور بزنند و با کمترین پینگ ممکن از بازی خود لذت ببرند.
+        </p>
+    </section>
+
+    <!-- Contact & Support Section -->
+    <section id="contact">
+        <h2 class="section-title" id="support">ارتباط با ما و پشتیبانی</h2>
+        <p style="text-align: center; color: var(--text-muted);">
+            پشتیبانی ۲۴ ساعته در تلگرام: <strong>@DNSGaming_Support</strong>
+        </p>
+    </section>
 
     <footer>
-        <p>کلیه حقوق محفوظ است © DNS Gaming</p>
+        <p>کلیه حقوق محفوظ است © DNS Gaming 2026</p>
     </footer>
 
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeText = document.getElementById('theme-text');
+            const themeIcon = document.querySelector('#theme-toggle i');
+
+            body.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                themeText.innerText = 'روشن';
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                themeText.innerText = 'تاریک';
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+    </script>
 </body>
 </html>
