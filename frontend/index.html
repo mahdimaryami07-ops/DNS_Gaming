@@ -149,16 +149,17 @@
         /* Hero Section */
         header {
             text-align: center;
-            padding: 80px 20px 40px;
+            padding: 100px 20px 60px;
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--primary-neon);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
         }
 
-        header p { color: var(--text-muted); font-size: 1.2rem; }
+        header p { color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8; }
 
         section {
             padding: 60px 20px;
@@ -170,63 +171,7 @@
         .section-title {
             text-align: center;
             font-size: 2.2rem;
-            margin-bottom: 40px;
-        }
-
-        /* Pricing Section */
-        .plans-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .plan-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 35px 24px;
-            text-align: center;
-            position: relative;
-            transition: transform 0.3s;
-        }
-
-        .plan-card:hover { transform: translateY(-5px); }
-
-        .plan-card.popular {
-            border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: #0b0f19;
-            font-weight: bold;
-            font-size: 0.85rem;
-            padding: 5px 18px;
-            border-radius: 20px;
-        }
-
-        .plan-title { font-size: 1.5rem; margin-bottom: 15px; }
-        .plan-price { font-size: 2.2rem; font-weight: bold; color: var(--primary-neon); margin-bottom: 20px; }
-        .plan-price span { font-size: 0.9rem; color: var(--text-muted); }
-
-        .plan-features { list-style: none; margin-bottom: 25px; text-align: right; }
-        .plan-features li { padding: 8px 0; color: var(--text-muted); font-size: 0.95rem; }
-        .plan-features li i { color: var(--accent); margin-left: 8px; }
-
-        .buy-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            border: none;
-            border-radius: 10px;
-            color: #0b0f19;
-            font-weight: bold;
-            cursor: pointer;
+            margin-bottom: 30px;
         }
 
         /* Marquee Section */
@@ -234,6 +179,7 @@
             padding: 40px 0;
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             overflow: hidden;
             width: 100%;
             margin-top: 40px;
@@ -284,6 +230,7 @@
             padding: 30px 20px;
             text-align: center;
             color: var(--text-muted);
+            margin-top: auto;
         }
     </style>
 </head>
@@ -298,7 +245,7 @@
         <ul class="nav-links">
             <li><a href="index.html">خانه</a></li>
             <li><a href="games.html">بازی‌ها</a></li>
-            <li><a href="#pricing">قیمت‌ها</a></li>
+            <li><a href="pricing.html">قیمت‌ها</a></li>
             <li><a href="#about">درباره ما</a></li>
             <li><a href="#support">پشتیبانی</a></li>
         </ul>
@@ -313,48 +260,8 @@
 
     <header id="home">
         <h1>سرویس DNS اختصاصی گیمینگ</h1>
-        <p>تجربه بازی بدون تحریم، با حداقل پینگ و بدون قطعی و Packet Loss</p>
+        <p>تجربه بازی بدون تحریم، با حداقل پینگ و بدون قطعی و Packet Loss برای تمامی بازی‌های آنلاین</p>
     </header>
-
-    <!-- Pricing Section -->
-    <section id="pricing">
-        <h2 class="section-title">پلن‌ها و قیمت‌ها</h2>
-        <div class="plans-container">
-            <div class="plan-card">
-                <h3 class="plan-title">اشتراک ۱ ماهه</h3>
-                <div class="plan-price">۸۹,۰۰۰ <span>تومان</span></div>
-                <ul class="plan-features">
-                    <li><i class="fa-solid fa-check"></i> آی‌پی اختصاصی با سرعت بالا</li>
-                    <li><i class="fa-solid fa-check"></i> کاهش پینگ و صفر کردن Packet Loss</li>
-                    <li><i class="fa-solid fa-check"></i> پشتیبانی از تمامی بازی‌ها</li>
-                </ul>
-                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
-            </div>
-
-            <div class="plan-card popular">
-                <span class="popular-badge">پیشنهاد ویژه</span>
-                <h3 class="plan-title">اشتراک ۳ ماهه</h3>
-                <div class="plan-price">۲۱۹,۰۰۰ <span>تومان</span></div>
-                <ul class="plan-features">
-                    <li><i class="fa-solid fa-check"></i> تمامی امکانات اشتراک ۱ ماهه</li>
-                    <li><i class="fa-solid fa-check"></i> ۲۰٪ تخفیف اقتصادی</li>
-                    <li><i class="fa-solid fa-check"></i> اولویت بالای پهنای باند</li>
-                </ul>
-                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
-            </div>
-
-            <div class="plan-card">
-                <h3 class="plan-title">اشتراک ۱ ساله</h3>
-                <div class="plan-price">۶۹۰,۰۰۰ <span>تومان</span></div>
-                <ul class="plan-features">
-                    <li><i class="fa-solid fa-check"></i> حداکثر صرفه‌جویی اقتصادی</li>
-                    <li><i class="fa-solid fa-check"></i> سرور اختصاصی VIP</li>
-                    <li><i class="fa-solid fa-check"></i> قابل استفاده روی ۲ دستگاه</li>
-                </ul>
-                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
-            </div>
-        </div>
-    </section>
 
     <!-- Scrolling Games Logos -->
     <div class="marquee-section">
@@ -385,8 +292,8 @@
     </section>
 
     <!-- Contact & Support Section -->
-    <section id="contact">
-        <h2 class="section-title" id="support">ارتباط با ما و پشتیبانی</h2>
+    <section id="support">
+        <h2 class="section-title">ارتباط با ما و پشتیبانی</h2>
         <p style="text-align: center; color: var(--text-muted);">
             پشتیبانی ۲۴ ساعته در تلگرام: <strong>@DNSGaming_Support</strong>
         </p>

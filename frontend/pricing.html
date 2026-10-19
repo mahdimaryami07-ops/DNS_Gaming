@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پلن‌ها و قیمت‌ها | DNS Gaming</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #151d2a;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --primary: #38bdf8;
+            --primary-neon: #00f2fe;
+            --accent: #22c55e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body.light-mode {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --primary: #0284c7;
+            --primary-neon: #0369a1;
+            --accent: #16a34a;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* Navigation Bar */
+        navbar {
+            position: sticky; top: 0; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 30px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon {
+            background: linear-gradient(135deg, #00f2fe, #38bdf8); color: #0b0f19;
+            width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+            border-radius: 12px; font-size: 1.3rem;
+        }
+        .logo-text { font-size: 1.4rem; font-weight: 800; color: var(--primary-neon); }
+
+        .nav-links { display: flex; list-style: none; gap: 10px; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.95rem; font-weight: 600; padding: 8px 14px; border-radius: 8px; }
+        .nav-links a:hover { color: var(--primary-neon); background: rgba(56, 189, 248, 0.08); }
+
+        .btn-back {
+            background: rgba(56, 189, 248, 0.1); border: 1px solid var(--primary); color: var(--primary-neon);
+            padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px;
+            text-decoration: none;
+        }
+        .btn-back:hover { background: var(--primary); color: #0b0f19; }
+
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; width: 100%; flex-grow: 1; }
+        .page-title { text-align: center; font-size: 2.5rem; color: var(--primary-neon); margin-bottom: 15px; }
+        .page-subtitle { text-align: center; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 50px; }
+
+        /* Pricing Section */
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .plan-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-neon);
+            box-shadow: 0 10px 25px rgba(0, 242, 254, 0.15);
+        }
+
+        .plan-card.popular {
+            border-color: var(--primary);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: #0b0f19;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 5px 18px;
+            border-radius: 20px;
+        }
+
+        .plan-title { font-size: 1.6rem; margin-bottom: 15px; }
+        .plan-price { font-size: 2.4rem; font-weight: bold; color: var(--primary-neon); margin-bottom: 25px; }
+        .plan-price span { font-size: 0.9rem; color: var(--text-muted); }
+
+        .plan-features { list-style: none; margin-bottom: 30px; text-align: right; flex-grow: 1; }
+        .plan-features li { padding: 10px 0; color: var(--text-muted); font-size: 0.95rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .plan-features li:last-child { border-bottom: none; }
+        .plan-features li i { color: var(--accent); margin-left: 8px; }
+
+        .buy-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            border: none;
+            border-radius: 10px;
+            color: #0b0f19;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .buy-btn:hover { opacity: 0.9; }
+
+        footer { background: var(--card-bg); padding: 30px 20px; text-align: center; color: var(--text-muted); margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <navbar>
+        <a href="index.html" class="nav-logo">
+            <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="logo-text">DNS Gaming</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">خانه</a></li>
+            <li><a href="games.html">بازی‌ها</a></li>
+            <li><a href="pricing.html" style="color: var(--primary-neon);">قیمت‌ها</a></li>
+            <li><a href="index.html#about">درباره ما</a></li>
+            <li><a href="index.html#support">پشتیبانی</a></li>
+        </ul>
+
+        <button class="btn-back" onclick="goBack()">
+            <i class="fa-solid fa-arrow-right"></i> بازگشت
+        </button>
+    </navbar>
+
+    <div class="container">
+        <h1 class="page-title">پلن‌ها و اشتراک‌های DNS Gaming</h1>
+        <p class="page-subtitle">پلن مورد نظر خود را انتخاب کرده و بلافاصله آی‌پی اختصاصی خود را تحویل بگیرید</p>
+
+        <div class="plans-container">
+            <div class="plan-card">
+                <h3 class="plan-title">اشتراک ۱ ماهه</h3>
+                <div class="plan-price">۸۹,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> آی‌پی اختصاصی با سرعت بالا</li>
+                    <li><i class="fa-solid fa-check"></i> کاهش پینگ و صفر کردن Packet Loss</li>
+                    <li><i class="fa-solid fa-check"></i> پشتیبانی از تمامی بازی‌ها</li>
+                    <li><i class="fa-solid fa-check"></i> قابل استفاده روی ۱ دستگاه</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
+
+            <div class="plan-card popular">
+                <span class="popular-badge">پیشنهاد ویژه</span>
+                <h3 class="plan-title">اشتراک ۳ ماهه</h3>
+                <div class="plan-price">۲۱۹,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> تمامی امکانات اشتراک ۱ ماهه</li>
+                    <li><i class="fa-solid fa-check"></i> ۲۰٪ تخفیف اقتصادی</li>
+                    <li><i class="fa-solid fa-check"></i> اولویت بالای پهنای باند</li>
+                    <li><i class="fa-solid fa-check"></i> قابل استفاده روی ۱ دستگاه</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
+
+            <div class="plan-card">
+                <h3 class="plan-title">اشتراک ۱ ساله</h3>
+                <div class="plan-price">۶۹۰,۰۰۰ <span>تومان</span></div>
+                <ul class="plan-features">
+                    <li><i class="fa-solid fa-check"></i> حداکثر صرفه‌جویی اقتصادی</li>
+                    <li><i class="fa-solid fa-check"></i> سرور اختصاصی VIP</li>
+                    <li><i class="fa-solid fa-check"></i> قابل استفاده روی ۲ دستگاه همزمان</li>
+                    <li><i class="fa-solid fa-check"></i> پشتیبانی تلفنی اختصاصی</li>
+                </ul>
+                <button class="buy-btn" onclick="alert('انتقال به درگاه پرداخت...')">خرید اشتراک</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>کلیه حقوق محفوظ است © DNS Gaming 2026</p>
+    </footer>
+
+    <script>
+        function goBack() {
+            if (document.referrer !== "") { window.history.back(); }
+            else { window.location.href = "index.html"; }
+        }
+    </script>
+</body>
+</html>
