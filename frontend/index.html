@@ -45,6 +45,19 @@
             display: flex;
             flex-direction: column;
             scroll-behavior: smooth;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Interactive Canvas Background */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* Navigation Bar */
@@ -146,17 +159,25 @@
             box-shadow: 0 0 18px rgba(0, 242, 254, 0.6);
         }
 
+        /* Main Content Layer */
+        main-content {
+            position: relative;
+            z-index: 1;
+        }
+
         /* Hero Section */
         header {
             text-align: center;
-            padding: 100px 20px 60px;
+            padding: 110px 20px 70px;
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
-            font-size: 3.2rem;
+            font-size: 3.3rem;
             color: var(--primary-neon);
             margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            text-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
         }
 
         header p { color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.8; }
@@ -166,6 +187,8 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
@@ -183,6 +206,8 @@
             overflow: hidden;
             width: 100%;
             margin-top: 40px;
+            position: relative;
+            z-index: 1;
         }
 
         .marquee-title {
@@ -231,10 +256,15 @@
             text-align: center;
             color: var(--text-muted);
             margin-top: auto;
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
+
+    <!-- Canvas Background for Interactive Particle Network -->
+    <canvas id="particle-canvas"></canvas>
 
     <navbar>
         <a href="index.html" class="nav-logo">
@@ -307,6 +337,107 @@
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }
+
+        /* --- Interactive Particle Network Script --- */
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 1.2;
+                this.vy = (Math.random() - 0.5) * 1.2;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00f2fe';
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        const particleCount = Math.floor((width * height) / 10000);
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Connect particles to each other
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 100})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect particles to mouse
+                if (mouse.x && mouse.y) {
+                    const mdx = particles[i].x - mouse.x;
+                    const mdy = particles[i].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                    if (mdist < mouse.radius) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - mdist / mouse.radius})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 </html>
